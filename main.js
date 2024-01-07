@@ -1,57 +1,45 @@
 //const { parse } = require("dotenv");
 
-let hour = 0, minute = 0, second = 0;
-let interval, countDown = false, counting = false;
+let hour = localStorage.getItem('hour') !== null ? parseInt(localStorage.getItem('hour')) : 0;
+let minute = localStorage.getItem('minute') !== null ? parseInt(localStorage.getItem('minute')) : 0;
+let second = localStorage.getItem('second') !== null ? parseInt(localStorage.getItem('second')) : 0;
+
+
+let interval;
+let countDown = localStorage.getItem('countDown') !== null ? localStorage.getItem('countDown') : false;
+let counting = localStorage.getItem('counting') !== null ? localStorage.getItem('counting') : false;
 const boxHour = document.getElementById('hour');
 const boxMinute = document.getElementById('minute');
 const boxSecond = document.getElementById('second');
 const message = document.querySelector('.message-overlay')
 const messageBtn = document.getElementById('message-btn');
 const currentTime = new Date().toISOString(); // Get current time in ISO format
-let pomodoro = {
+let pomodoro = JSON.parse(localStorage.getItem('pomodoro')) || {
     pomodoroStart: false,
     pomodoroStop: true,
-    pomodoroCounting: false,
+    pomodoroCounting: false
 };
 
-//event load
-document.addEventListener('DOMContentLoaded', checkTimer);
+//update display
+setTimeout(() => {
+    updateDisplay()
+}, 500);
 
-window.addEventListener('beforeunload', function (e) {
-    //save all data to local storage
-    saveCurrentTime();
+window.onload = function() {
     
-    e.returnValue = ''; // Chrome requires returnValue to be set.
-});
+    hour = localStorage.getItem('hour') !== null ? parseInt(localStorage.getItem('hour')) : 0;
+    minute = localStorage.getItem('minute') !== null ? parseInt(localStorage.getItem('minute')) : 0;
+    second = localStorage.getItem('second') !== null ? parseInt(localStorage.getItem('second')) : 0;
+    countDown = localStorage.getItem('countDown') !== null ? localStorage.getItem('countDown') : false;
+    localStorage.getItem('counting') = false;
+    // Update your page elements or perform other actions
+    updateDisplay();
+};
 
 
-// On page load
-function checkTimer() {
-    
-    // Check for NaN and assign default values if needed
-    hour = isNaN(localStorage.getItem('hour')) ? 0 : localStorage.getItem('hour');
-    minute = isNaN(localStorage.getItem('minute')) ? 0 : localStorage.getItem('minute');
-    second = isNaN(localStorage.getItem('second')) ? 0 : localStorage.getItem('second');
-    pomodoro = JSON.parse(localStorage.getItem('pomodoro'));
-    countDown = localStorage.getItem('countDown');
-    counting = localStorage.getItem('counting');
-
-
-    if(second > 0 || minute > 0 || hour > 0) {
-        toggleBtn();
-        checkTime();
-        console.log(`here ${currentTime}`)
-    }
-    //if the timer is counting down
-    if (localStorage.getItem('counting') === 'true' && localStorage.getItem('countDown') === 'false') {
-        setInterval(timer, 1000);
-    }
-    
-}
 
 //function to save time to local storage
 function saveCurrentTime() {
-    //const currentTime = new Date().toISOString(); // Get current time in ISO format
     localStorage.setItem('second', second );
     localStorage.setItem('minute', minute );
     localStorage.setItem('hour', hour );
@@ -101,6 +89,11 @@ function reset() {
     localStorage.setItem('second', 0 );
     localStorage.setItem('minute', 0 );
     localStorage.setItem('hour', 0 );
+    localStorage.setItem('currentTime', currentTime);
+    localStorage.setItem('pomodoro', JSON.stringify(pomodoro));
+    localStorage.setItem('countDown', countDown);
+    localStorage.setItem('counting', counting);
+
     updateDisplay();
     document.getElementById('title').innerHTML = '';
     toggleBtn();
@@ -129,6 +122,7 @@ document.querySelector('.stop-btn').addEventListener('click', () => {
     }
     toggleBtn();
     clearInterval(interval);
+    saveCurrentTime()
 });
 
 document.querySelector('.reset-btn').addEventListener('click', reset);
@@ -199,13 +193,15 @@ document.getElementById('pomodoroButton').onclick = function() {
     toggleBtn();
     minute =25
     interval = setInterval(countDownFun,1000)
-    console.log(pomodoro)
+    localStorage.setItem('pomodoro', JSON.stringify(pomodoro));
+    saveCurrentTime()
 }
 
 //message advertising
 setTimeout(() => {
     message.style.display = 'block'
-}, 130000);
+}, 9000);
+
 //close message
 messageBtn.onclick = function() {
     message.style.display = 'none'
