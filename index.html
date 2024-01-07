@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link style file -->
+    <link rel="stylesheet" href="style.css">
+    <!-- link with google  -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- link with fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+    <title>Time Counter</title>
+</head>
+<body>
+<div class="body">
+    <div class="timer">
+        <h1 id="title"></h1>
+        <div class="time"> 
+            <span id="hour">00</span>
+            <p>:</p>
+            <span id="minute">00</span>
+            <p>:</p>
+            <span id="second">00</span>
+        </div>
+        <div class="buttons">
+            <span class="material-symbols-outlined start-btn">
+                play_arrow
+                </span>
+            <span class="material-symbols-outlined stop-btn">
+            stop_circle
+            </span>
+            <span class="material-symbols-outlined reset-btn">
+                device_reset
+                </span>
+        </div>
+        <div class="down">
+
+            <hr>
+            <p>OR</p>
+            <h4>Set Time</h4>
+            <div class="buttons">
+                <span class="material-symbols-outlined set-btn">
+                    timer
+                    </span>
+                    <button id="pomodoroButton">Start Pomodoro</button>
+                </div>
+        </div>
+
+        <audio id="sound" src="hotel-bell-ding-1-174457.mp3"></audio>
+    </div>
+</div>
+<!-- error message -->
+
+    <div class="message-overlay">
+        <div class="message">
+            <h1>Hey nice to see you here!</h1>
+            <p>I'm thrilled to see you using my website! If you have any questions, suggestions, or just want to connect, feel free to drop by my Twitter <a href="https://twitter.com/azampro_" target="_blank">@azampro_</a>. I'm always excited to make new friends and engage with my audience. See you there! 😊</p>
+            <button id="message-btn">okay</button>
+        </div>
+    </div>
+    <!-- linke the js file -->
+    <script src="main.js"></script>
+</body>
+</html>

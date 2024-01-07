@@ -1,0 +1,227 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #a2d5ff;
+    height: 100vh; 
+    
+}
+.body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;  
+    align-items: center; 
+}
+.message-overlay {
+    display: none;  /* Hide by default */
+    position: fixed; /* Stay in place */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+    z-index: 99; /* Sit on top */
+}
+.message{
+    z-index: 100;
+    width: 70%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the div horizontally */
+    padding: 20px;
+    text-align: center; /* Center the text inside the div */
+    background-color: #ffffff; /* Light red background */
+    border-radius: 10px; /* Rounded corners */
+    position: absolute;
+    top: 50%; /* Position in the middle vertically */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Adjust the position to truly center */
+    font-size: 1.2em; /* Larger text */
+}
+.message h1{
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+.message p{
+    font-size: 1.5rem;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.message button{
+    background-color: #000000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+#title{
+    text-align: center;
+    font-size: 2rem;
+    color: green;
+}
+.timer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    -webkit-box-shadow: 3px 3px 10px 5px #7195b3;
+-moz-box-shadow: 3px 3px 10px 5px #7195b3;
+box-shadow: 3px 3px 10px 5px #7195b3;
+}
+.time{
+    padding: 40px 30px;
+    display: flex;
+    align-items: center;
+    
+}
+.time span{
+    padding: 15px;
+    margin: 0 15px;
+    background-color: #fff;
+    font-size: 3rem;
+    -webkit-box-shadow: 3px 3px 11px 3px #dddddd;
+-moz-box-shadow: 3px 3px 11px 3px #dddddd;
+box-shadow: 3px 3px 11px 3px #dddddd;
+
+}
+.time p{
+    font-size: 2rem;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;    
+    padding: 20px;
+}
+.buttons span{
+    font-size: 60px;
+    cursor: pointer;-webkit-box-shadow: 3px 3px 10px 3px #dddddd;
+    -moz-box-shadow: 3px 3px 10px 3px #dddddd;
+    box-shadow: 3px 3px 10px 3px #dddddd;
+    padding: 5px;
+}
+
+.buttons span:first-child{
+    color: #fff;
+    background-color: #00b84c;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+}
+.buttons span:first-child:hover{
+    transform:translateY(-5px);
+    background-color: #008d3b;
+    
+}
+.buttons span:nth-child(2){
+    display: none;
+    color: #fff;
+    background-color: #ff0000;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+}
+.buttons span:nth-child(2):hover{
+    transform:translateY(-5px);
+    background-color: #aa0000;
+}
+.buttons span:last-child{
+    
+    color: #fff;
+    background-color: #000000;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+}
+.buttons span:last-child:hover{
+    transform:translateY(-5px);
+    background-color: #000000;
+    color: #ffffff;
+}
+.timer .down {
+    width: 100%;
+    margin: 20px 0;
+    position: relative;
+}
+.timer .down p{
+    padding: 2px 10px;
+    font-size: 1.5rem;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.timer .down h4{
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.8rem;
+}
+.down .buttons span{
+    background-color: #777;
+}
+.down .buttons span:hover{
+    background-color: #505050;
+}
+
+#pomodoroButton {
+    background-color: rgb(250, 72, 40);
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+#pomodoroButton:hover {
+    transform: translateY(-5px);
+    background-color: #e61919;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+#pomodoroButton:focus {
+    outline: none; 
+}
+
+@media (max-width: 720px) {
+    .time{
+        padding: 20px 10px;
+        display: flex;
+        align-items: center;
+        
+    }
+    .time span{
+        padding: 10px;
+        margin: 0 15px;
+        background-color: #fff;
+        font-size: 3rem;
+    }
+    .buttons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;    
+        padding: 20px;
+    }
+    .buttons span{
+        font-size: 50px;
+    }
+    
+}
+@media (max-width: 640px) {
+    .timer{
+        padding: 5px;
+    }
+    
+}
