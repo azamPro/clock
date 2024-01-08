@@ -30,9 +30,15 @@ window.onload = function() {
     hour = localStorage.getItem('hour') !== null ? parseInt(localStorage.getItem('hour')) : 0;
     minute = localStorage.getItem('minute') !== null ? parseInt(localStorage.getItem('minute')) : 0;
     second = localStorage.getItem('second') !== null ? parseInt(localStorage.getItem('second')) : 0;
-    countDown = localStorage.getItem('countDown') !== null ? localStorage.getItem('countDown') : false;
-    localStorage.getItem('counting') = false;
-    // Update your page elements or perform other actions
+    //countDown = localStorage.getItem('countDown') !== null ? localStorage.getItem('countDown') : false;
+    countDown = localStorage.getItem('countDown') === 'true';
+    counting = localStorage.getItem('counting') === 'true';
+
+    if (counting) {
+        // Resume timer based on countdown or normal timer
+        interval = setInterval(countDown ? countDownFun : timer, 1000);
+        toggleBtn()
+    }    // Update your page elements or perform other actions
     updateDisplay();
 };
 
@@ -109,11 +115,12 @@ document.querySelector('.start-btn').addEventListener('click', () => {
 function timer() {
     second++;
     checkTime();
-
+    updateDisplay();
     //save time to local storage
     saveCurrentTime();
 }
 
+//stop timer
 document.querySelector('.stop-btn').addEventListener('click', () => {
     counting = false;
     if (pomodoro.pomodoroStart) {
@@ -127,8 +134,8 @@ document.querySelector('.stop-btn').addEventListener('click', () => {
 
 document.querySelector('.reset-btn').addEventListener('click', reset);
 
+//countdown function
 function countDownFun() {
-    console.log('hello!')
     if (pomodoro.pomodoroStart) {
         pomodoro.pomodoroCounting = true;
         pomodoro.pomodoroStop = false;
@@ -141,9 +148,8 @@ function countDownFun() {
         minute = 59;
         hour--;
     }
-
-    checkTime();
     second--;
+    checkTime();
 
     if (second === 0 && minute === 0 && hour === 0) {
         clearInterval(interval);
@@ -156,6 +162,7 @@ function countDownFun() {
     saveCurrentTime();
 }
 
+//set timer
 document.querySelector('.set-btn').addEventListener('click', () => {
     reset();
     let newTime;
@@ -182,6 +189,7 @@ document.querySelector('.set-btn').addEventListener('click', () => {
     toggleBtn();
 });
 
+//pomodoro timer
 document.getElementById('pomodoroButton').onclick = function() {
     if (pomodoro.pomodoroStart) {
         document.getElementById('title').style.color = 'red';
