@@ -180,7 +180,10 @@ document.querySelector('.set-btn').addEventListener('click', () => {
     if (newTime > 60) {
         minute = newTime % 60;
         hour = Math.floor(newTime / 60);
-    } else {
+    } else if(newTime <= 0) {
+        alert("you can't add negtive number! stupid!");
+        return;
+    }else{
         minute = newTime;
     }
 
